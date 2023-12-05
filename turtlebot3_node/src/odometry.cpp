@@ -130,8 +130,9 @@ void Odometry::joint_state_and_imu_callback(
     imu_msg->header.stamp.nanosec);
 
   static rclcpp::Time last_time = joint_state_msg->header.stamp;
+  rclcpp::Time current_time = joint_state_msg->header.stamp;
   rclcpp::Duration duration(rclcpp::Duration::from_nanoseconds(
-      joint_state_msg->header.stamp.nanosec - last_time.nanoseconds()));
+      current_time.nanoseconds() - last_time.nanoseconds()));
 
   update_joint_state(joint_state_msg);
   update_imu(imu_msg);
